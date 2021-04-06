@@ -1,0 +1,56 @@
+{
+	"name": "NeayiNavbar",
+	"version": "1.0",
+	"author": [
+		"[https://www.mediawiki.org/wiki/User:BertrandGorge Bertrand Gorge]"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:NeayiNavbar",
+	"descriptionmsg": "neayinavbar-desc",
+	"manifest_version": 1,
+	"type": "parserhook",
+	"license-name": "MIT",
+	"requires": {
+		"MediaWiki": ">= 1.35.0"
+	},
+	"MessagesDirs": {
+		"NeayiNavbar": [
+			"i18n"
+		]
+	},
+	"ResourceModules": {
+		"ext.NeayiNavbar": {
+			"styles": [
+				"NeayiNavbar.css"
+			],
+			"scripts": [
+				"NeayiNavbar.js"
+			],
+			"dependencies": [
+				"oojs-ui"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			],
+			"messages": [
+				"NeayiNavbar-buttontext-Neayi-permalink"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteExtPath": "NeayiNavbar/resources"
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\NeayiNavbar\\": "includes/"
+	},
+	"APIModules": {
+
+	},
+	"Hooks": {
+		"BeforePageDisplay": "MediaWiki\\Extension\\NeayiNavbar\\NeayiNavbarHooks::initializeJS"
+	},
+	"config": {
+		"NeayiNavbarAllowedNamespaces" : null
+	}
+}
