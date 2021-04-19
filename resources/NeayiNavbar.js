@@ -53,7 +53,9 @@ var neayinavbar_controller = ( function () {
 			if (this.userIsAnon)
 			{
 				// Just change the return path of the connection link
-				$('a.neayi-username').attr('href', $('#pt-login > a').attr('href'));
+				var relevantPageName = mw.config.get( 'wgRelevantPageName' );
+
+				$( 'a.neayi-username').attr('href', '/index.php?title=Special:Login&returnto=' + relevantPageName);
 			}
 			else
 			{
