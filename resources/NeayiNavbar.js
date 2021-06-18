@@ -41,12 +41,6 @@ var neayinavbar_controller = ( function () {
 
 			this.setupDivs();
 		},
-		scrollToAnchor: function ( id ) {
-			var element = $( '#' + id );
-			if ( element.length ) {
-				$( 'html,body' ).animate( { scrollTop: element.offset().top - 50 }, 'slow' );
-			}
-		},
 		setupDivs: function () {
 			var self = this;
 
@@ -67,9 +61,25 @@ var neayinavbar_controller = ( function () {
 				
 				$( ".navbar-tool > .p-personal-tools" ).appendTo( "#neayi-navbar-menu" );
 			}
-		}
 
-		
+			// Setup search
+			$( "#searchform" ).appendTo("#neayi-searchform");
+
+			$( "#neayi-search-button" ).on( "click", function() {
+				$( "#neayi-searchform" ).show();
+				$( 'html,body' ).animate( { scrollTop: 0 }, 'slow' );
+			  });
+
+			$( "#neayi-search-button-collapsed" ).on( "click", function() {
+				$( "#neayi-searchform" ).show();
+				$( "#mw-navigation div.navbar-collapse" ).collapse('hide');
+				$( 'html,body' ).animate( { scrollTop: 0 }, 'slow' );
+			  });
+
+			$( "#searchform-close" ).on( "click", function() {
+				$( "#neayi-searchform" ).hide();
+			  });
+		}
 	}; // return line 26
 }() );
 
