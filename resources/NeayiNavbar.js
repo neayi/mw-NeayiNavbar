@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-var neayinavbar_controller = ( function () {
+var neayinavbar_controller = (function () {
 	'use strict';
 
 	return {
@@ -31,10 +31,10 @@ var neayinavbar_controller = ( function () {
 		userName: null,
 
 		initialize: function () {
-			this.baseUrl = window.location.href.split( /[?#]/ )[ 0 ];
-			this.imagepath = mw.config.get( 'wgExtensionAssetsPath' ) + '/NeayiNavbar/images/';
+			this.baseUrl = window.location.href.split(/[?#]/)[0];
+			this.imagepath = mw.config.get('wgExtensionAssetsPath') + '/NeayiNavbar/images/';
 
-			var config = mw.config.get( 'NeayiNavbar' );
+			var config = mw.config.get('NeayiNavbar');
 			this.userPhoto = config.wgUserAvatarURL;
 			this.userIsAnon = config.wgUserIsAnon;
 			this.userName = config.wgUserName;
@@ -44,53 +44,110 @@ var neayinavbar_controller = ( function () {
 		setupDivs: function () {
 			var self = this;
 
-			if (this.userIsAnon)
-			{
+			if (this.userIsAnon) {
 				// Just change the return path of the connection link
-				var relevantPageName = mw.config.get( 'wgRelevantPageName' );
+				var relevantPageName = mw.config.get('wgRelevantPageName');
 
-				$( 'a.neayi-username').attr('href', '/index.php?title=Special:Login&returnto=' + relevantPageName);
+				$('a.neayi-username').attr('href', '/index.php?title=Special:Login&returnto=' + relevantPageName);
 			}
-			else
-			{
+			else {
 				$('#neayi-createaccount').remove();
 				$(`<div class="row align-items-center" style="height: 100%; margin: 0">
 					<div class="col-auto"><img class="neayi-avatar" src="${this.userPhoto}"></a></div>
 					<div class="col"><div class="navbar-tool dropdown position-static show" id="neayi-navbar-menu"><a href="#" class="neayi-username dropdown-toggle" data-toggle="dropdown" data-boundary="viewport" title="Vous êtes connecté en tant que ${this.userName}.">${this.userName}</a></div></div>
-				</div>`).appendTo( '.create-profile' );
-				
-				$( ".navbar-tool > .p-personal-tools" ).appendTo( "#neayi-navbar-menu" );
+				</div>`).appendTo('.create-profile');
+
+				$(".navbar-tool > .p-personal-tools").appendTo("#neayi-navbar-menu");
 			}
 
 			// Setup search
-			$( "#searchform" ).appendTo("#neayi-searchform");
+			$("#searchform").appendTo("#neayi-searchform");
 
-			$( "#neayi-search-button" ).on( "click", function() {
-				$( "#neayi-searchform" ).show();
-				$( 'html,body' ).animate( { scrollTop: 0 }, 'slow' );
-			  });
+			$("#neayi-search-button").on("click", function () {
+				$("#neayi-searchform").show();
+				$('html,body').animate({ scrollTop: 0 }, 'slow');
+			});
 
-			$( "#neayi-search-button-collapsed" ).on( "click", function() {
-				$( "#neayi-searchform" ).show();
-				$( "#mw-navigation div.navbar-collapse" ).collapse('hide');
-				$( 'html,body' ).animate( { scrollTop: 0 }, 'slow' );
-			  });
+			$("#searchform-close").on("click", function () {
+				$("#neayi-searchform").hide();
+			});
 
-			$( "#searchform-close" ).on( "click", function() {
-				$( "#neayi-searchform" ).hide();
-			  });
+			// Setup the table of content
+			var toc = $('#toc');
+			if (toc) {
+				toc.appendTo('.leftSide');
+
+				toc.find("a").each(function () {
+					$(this).addClass("nav-link");
+					$(this).parent().addClass("nav-item");
+					$(this).parent().parent().addClass("nav flex-column");
+				});
+
+				setTimeout(function () {
+					$('body').scrollspy({ target: '#toc', 'offset': 0 });
+				}, 1000);
+			}
+
+			// Hero Background Slides
+			var imageHead = document.getElementById("js-hero");
+			if (imageHead) {
+				var images = [
+					"/skins/skin-neayi/images/hero/shutterstock_1140147020.jpg",
+					"/skins/skin-neayi/images/hero/shutterstock_1429817771.jpg",
+					"/skins/skin-neayi/images/hero/shutterstock_1504970357.jpg",
+					"/skins/skin-neayi/images/hero/shutterstock_150648098.jpg",
+					"/skins/skin-neayi/images/hero/shutterstock_1730941180.jpg",
+					"/skins/skin-neayi/images/hero/shutterstock_340650272.jpg",
+					"/skins/skin-neayi/images/hero/shutterstock_484967650.jpg",
+					"/skins/skin-neayi/images/hero/shutterstock_562305403.jpg",
+					"/skins/skin-neayi/images/hero/shutterstock_660208033.jpg",
+					"/skins/skin-neayi/images/hero/shutterstock_708166867.jpg",
+					"/skins/skin-neayi/images/hero/shutterstock_91296467.jpg"
+				];
+
+				var i = 0;
+
+				setInterval(function () {
+					imageHead.style.backgroundImage = "url(" + images[i] + ")";
+					i = i + 1;
+					if (i == images.length) {
+						i = 0;
+					}
+				}, 4000);
+			}
+
+			// Horizontal scrollspy
+			var bar_bg = $("#scrollbar #scrollbar-bg");
+			bar_bg.css("min-width", $(document).width() + "px");
+
+			$(window).resize(function() {
+				// Update the gradient width
+				bar_bg.css("min-width", $(document).width() + "px");
+			});
+
+			$(window).scroll(function(e) {
+				// Change the width of the progress bar
+				var bar = $("#scrollbar"),
+					dw  = $(document).width(),
+					dh  = $(document).height(),
+					wh  = $(window).height(),
+					pos = $(document).scrollTop(),
+					bw  = ((pos / (dh - wh)) * 100);
+
+				bar.css("width", bw + "%");
+			});
 		}
 	}; // return line 26
-}() );
+}());
 
 window.NeayiNavbarController = neayinavbar_controller;
 
-( function () {
-	$( document )
-		.ready( function () {
-			if ( mw.config.exists( 'NeayiNavbar' ) ) {
+(function () {
+	$(document)
+		.ready(function () {
+			if (mw.config.exists('NeayiNavbar')) {
 				window.NeayiNavbarController.initialize();
 			}
-		} );
-}() );
+		});
+}());
 
