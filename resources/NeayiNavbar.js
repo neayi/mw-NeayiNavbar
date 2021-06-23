@@ -138,9 +138,9 @@ var neayinavbar_controller = (function () {
 			});
 
 			// Force the sticky menu to recalculate every 5 seconds
-			setInterval(function () {
-				$('.sticky').hcSticky('refresh');
-			}, 5000);
+			// setInterval(function () {
+			// 	$('.sticky').hcSticky('refresh');
+			// }, 5000);
 		}
 	}; // return line 26
 }());
