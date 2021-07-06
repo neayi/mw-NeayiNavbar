@@ -38,6 +38,7 @@ var neayinavbar_controller = (function () {
 			this.userPhoto = config.wgUserAvatarURL;
 			this.userIsAnon = config.wgUserIsAnon;
 			this.userName = config.wgUserName;
+			this.wgInsightsRootURL = config.wgInsightsRootURL;
 
 			this.setupDivs();
 		},
@@ -58,6 +59,7 @@ var neayinavbar_controller = (function () {
 				</div>`).appendTo('.create-profile');
 
 				$(".navbar-tool > .p-personal-tools").appendTo("#neayi-navbar-menu");
+				$(" #pt-userpage > a ").attr('href', this.wgInsightsRootURL + 'profile');
 			}
 
 			// Setup search
@@ -136,11 +138,6 @@ var neayinavbar_controller = (function () {
 
 				bar.css("width", bw + "%");
 			});
-
-			// Force the sticky menu to recalculate every 5 seconds
-			// setInterval(function () {
-			// 	$('.sticky').hcSticky('refresh');
-			// }, 5000);
 		}
 	}; // return line 26
 }());
