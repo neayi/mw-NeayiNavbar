@@ -42,8 +42,8 @@ class NeayiNavbarHooks
 		OutputPage $output,
 		Skin $skin
 	) {
-		$cs = NeayiNavbar::singleton();
-		$cs->init($output);
+		$navbar = NeayiNavbar::singleton();
+		$navbar->init($output);
 		return true;
 	}
 }

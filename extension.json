@@ -19,14 +19,8 @@
 	},
 	"ResourceModules": {
 		"ext.NeayiNavbar": {
-			"styles": [
-				"NeayiNavbar.css"
-			],
 			"scripts": [
 				"NeayiNavbar.js"
-			],
-			"dependencies": [
-				"oojs-ui"
 			],
 			"targets": [
 				"desktop",
