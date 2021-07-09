@@ -83,12 +83,14 @@ class NeayiNavbar
 			$navbarParams['wgUserIsAnon'] = true;
 			$navbarParams['wgUserAvatarURL'] = '';
 			$navbarParams['wgUserName'] = '';
+			$navbarParams['wgInsightsRootURL'] = $GLOBALS['wgInsightsRootURL'];
 		}
 		else
 		{
 			$navbarParams['wgUserIsAnon'] = false;
 			$navbarParams['wgUserAvatarURL'] = $this->getAvatar($user);
 			$navbarParams['wgUserName'] = $user->getRealName();
+			$navbarParams['wgInsightsRootURL'] = $GLOBALS['wgInsightsRootURL'];
 		}
 
 		$store = MediaWikiServices::getInstance()->getWatchedItemStore();
