@@ -68,6 +68,7 @@ var neayinavbar_controller = (function () {
 			$("#neayi-search-button").on("click", function () {
 				$("#neayi-searchform").show();
 				$('html,body').animate({ scrollTop: 0 }, 'slow');
+				$('#searchInput').focus();
 			});
 
 			$("#searchform-close").on("click", function () {
