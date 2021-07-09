@@ -29,6 +29,8 @@ var neayinavbar_controller = (function () {
 		userPhoto: null,
 		userIsAnon: null,
 		userName: null,
+		userGuid: null,
+		wgInsightsRootURL: null,
 
 		initialize: function () {
 			this.baseUrl = window.location.href.split(/[?#]/)[0];
@@ -39,9 +41,12 @@ var neayinavbar_controller = (function () {
 			this.userIsAnon = config.wgUserIsAnon;
 			this.userName = config.wgUserName;
 			this.wgInsightsRootURL = config.wgInsightsRootURL;
+			this.userGuid = config.wgUserGuid;
 
 			this.setupDivs();
+			this.getRealUserName();
 		},
+
 		setupDivs: function () {
 			var self = this;
 
@@ -138,8 +143,27 @@ var neayinavbar_controller = (function () {
 					bw  = ((pos / (dh - wh)) * 100);
 
 				bar.css("width", bw + "%");
+			});		
+		},
+
+
+		getRealUserName: function () {
+			// https://insights.dev.tripleperformance.fr/api/user/b55afad2-234f-44aa-ac99-2ee763729c5d/context
+			var self = this;
+
+			if (self.userGuid == '')
+				return;
+
+			$.ajax({
+				url: self.wgInsightsRootURL + "api/user/" + self.userGuid + "/context",
+				dataType: 'json',
+				method: "GET"
+			}).done(function (data) {
+				self.userName = data.firstname + ' ' + data.lastname;
+				$( 'a.neayi-username' ).text(self.userName).attr('title', "Vous êtes connecté en tant que " + this.userName + ".");
+				$( 'a.pt-userpage' ).text(self.userName);
 			});
-		}
+		},		
 	}; // return line 26
 }());
 

@@ -84,6 +84,7 @@ class NeayiNavbar
 			$navbarParams['wgUserAvatarURL'] = '';
 			$navbarParams['wgUserName'] = '';
 			$navbarParams['wgInsightsRootURL'] = $GLOBALS['wgInsightsRootURL'];
+			$navbarParams['wgUserGuid'] = '';
 		}
 		else
 		{
@@ -91,6 +92,7 @@ class NeayiNavbar
 			$navbarParams['wgUserAvatarURL'] = $this->getAvatar($user);
 			$navbarParams['wgUserName'] = $user->getRealName();
 			$navbarParams['wgInsightsRootURL'] = $GLOBALS['wgInsightsRootURL'];
+			$navbarParams['wgUserGuid'] = self::getNeayiGUID( $user );
 		}
 
 		$store = MediaWikiServices::getInstance()->getWatchedItemStore();
