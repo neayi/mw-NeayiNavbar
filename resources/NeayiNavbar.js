@@ -80,6 +80,18 @@ var neayinavbar_controller = (function () {
 				$("#neayi-searchform").hide();
 			});
 
+			// If the search form is visible (on mobile) we scroll automatically past it:
+			if ($('#neayi-searchform').is(':visible') && $('html').scrollTop() == 0)
+			{
+				var offset = $('.mainContainer').offset();
+				offset.left -= 20;
+				offset.top -= 35;
+				$('html, body').animate({
+					scrollTop: offset.top,
+					scrollLeft: offset.left
+				}, 0);
+			}
+
 			// Setup the table of content
 			var toc = $('#toc');
 			if (toc) {
@@ -143,7 +155,7 @@ var neayinavbar_controller = (function () {
 					bw  = ((pos / (dh - wh)) * 100);
 
 				bar.css("width", bw + "%");
-			});		
+			});
 		},
 
 
@@ -163,7 +175,7 @@ var neayinavbar_controller = (function () {
 				$( 'a.neayi-username' ).text(self.userName).attr('title', "Vous êtes connecté en tant que " + this.userName + ".");
 				$( 'a.pt-userpage' ).text(self.userName);
 			});
-		},		
+		},
 	}; // return line 26
 }());
 
