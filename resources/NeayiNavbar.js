@@ -137,7 +137,7 @@ var neayinavbar_controller = (function () {
 			}
 
 			// Horizontal scrollspy
-			var bar_bg = $("#scrollbar #scrollbar-bg");
+			var bar_bg = $(".scrollbar-bg");
 			bar_bg.css("min-width", $(document).width() + "px");
 
 			$(window).resize(function() {
@@ -148,6 +148,7 @@ var neayinavbar_controller = (function () {
 			$(window).scroll(function(e) {
 				// Change the width of the progress bar
 				var bar = $("#scrollbar"),
+					barmobile = $("#scrollbar-mobile"),
 					dw  = $(document).width(),
 					dh  = $(document).height(),
 					wh  = $(window).height(),
@@ -155,6 +156,7 @@ var neayinavbar_controller = (function () {
 					bw  = ((pos / (dh - wh)) * 100);
 
 				bar.css("width", bw + "%");
+				barmobile.css("width", bw + "%");
 			});
 		},
 
