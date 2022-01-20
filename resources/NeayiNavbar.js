@@ -103,6 +103,10 @@ var neayinavbar_controller = (function () {
 					$(this).parent().parent().addClass("nav flex-column");
 				});
 
+				// If the Toc has too many elements, we remove all elements of level 4 (====):
+				if ($('#toc li').length > 10)
+					$('#toc li.toclevel-3').remove();
+
 				setTimeout(function () {
 					$('body').scrollspy({ target: '#toc', 'offset': 0 });
 				}, 1000);
