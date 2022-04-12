@@ -162,8 +162,18 @@ var neayinavbar_controller = (function () {
 				bar.css("width", bw + "%");
 				barmobile.css("width", bw + "%");
 			});
+
+			this.fixSearchResults();
 		},
 
+		fixSearchResults: function() {
+			// See https://github.com/neayi/tripleperformance/issues/192
+			$('.mw-search-result-heading').each(function () {
+				$(this).html($(this).html()
+							.replace(/&lt;span class="searchmatch"&gt;/g, '<span class="searchmatch">')
+							.replace(/&lt;\/span&gt;/g, '</span>'));
+			});
+		},
 
 		getRealUserName: function () {
 			// https://insights.dev.tripleperformance.fr/api/user/b55afad2-234f-44aa-ac99-2ee763729c5d/context
