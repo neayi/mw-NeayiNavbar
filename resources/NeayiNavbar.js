@@ -76,6 +76,8 @@ var neayinavbar_controller = (function () {
 				$('#searchInput').focus();
 			});
 
+			$(`<input type="hidden" value="default" name="profile">`).appendTo("#searchform");
+
 			$("#searchform-close").on("click", function () {
 				$("#neayi-searchform").hide();
 			});
