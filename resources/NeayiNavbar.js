@@ -103,6 +103,12 @@ var neayinavbar_controller = (function () {
 				$("#neayi-searchform").hide();
 			});
 
+			// Use the wiki/Search page with the WikiSearchFront instead of Special:Search
+			$('#searchform > input[name="title"]').val( 'Search' );
+			$('#searchInput').attr('name', 'term');
+			$('#homesearch').attr('action', '/wiki/Search');
+			$('#searchInput.searchboxInput ').attr('name', 'term');
+
 			// If the search form is visible (on mobile) we scroll automatically past it:
 			if ($('#neayi-searchform').is(':visible') && $('html').scrollTop() == 0)
 			{
