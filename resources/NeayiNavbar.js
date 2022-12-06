@@ -56,7 +56,7 @@ var neayinavbar_controller = (function () {
 		// the title
 		setupSearchPages: function() {
 			var wikisearch = $('#app > .wikisearch');
-			if (wikisearch) {
+			if (wikisearch.length > 0) {
 				console.log("Wikisearch page");
 				$('.leftSide').remove();
 				$('.interaction-bloc').remove();
