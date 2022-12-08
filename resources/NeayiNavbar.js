@@ -45,27 +45,7 @@ var neayinavbar_controller = (function () {
 
 			this.setupDivs();
 
-			this.setupSearchPages();
-
 			this.getRealUserName();
-		},
-
-		// Remove stuff on search pages
-		// the left column
-		// the interactions
-		// the title
-		setupSearchPages: function() {
-			var wikisearch = $('#app > .wikisearch');
-			if (wikisearch.length > 0) {
-				console.log("Wikisearch page");
-				$('.leftSide').remove();
-				$('.interaction-bloc').remove();
-
-				$('.contentHeader').remove();
-				$('.mw-indicators').remove();
-
-				$('#content').addClass('mw-body-search');
-			}
 		},
 
 		setupDivs: function () {
