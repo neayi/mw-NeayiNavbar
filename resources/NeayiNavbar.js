@@ -101,53 +101,68 @@ var neayinavbar_controller = (function () {
 				}, 0);
 			}
 
+			this.setupTableOfContent();
+			this.setHomepageHeroImages();
+			this.setHorizontalScrollspy();
+		},
+
+		setupTableOfContent: function() {
+
 			// Setup the table of content
 			var toc = $('#toc');
-			if (toc) {
-				toc.appendTo('.leftSide');
+			if (!toc || toc.length == 0)
+				return;
 
-				toc.find("a").each(function () {
-					$(this).addClass("nav-link");
-					$(this).parent().addClass("nav-item");
-					$(this).parent().parent().addClass("nav flex-column");
-				});
+			toc.appendTo('.leftSide');
 
-				// If the Toc has too many elements, we remove all elements of level 4 (====):
-				if ($('#toc li').length > 10)
-					$('#toc li.toclevel-3').remove();
+			toc.find("a").each(function () {
+				$(this).addClass("nav-link");
+				$(this).parent().addClass("nav-item");
+				$(this).parent().parent().addClass("nav flex-column");
+			});
 
-				setTimeout(function () {
-					$('body').scrollspy({ target: '#toc', 'offset': 0 });
-				}, 1000);
-			}
+			// If the Toc has too many elements, we remove all elements of level 4 (====):
+			if ($('#toc li').length > 10)
+				$('#toc li.toclevel-3').remove();
+
+			setTimeout(function () {
+				$('body').scrollspy({ target: '#toc', 'offset': 0 });
+			}, 1000);
+		},
+
+		setHomepageHeroImages: function() {
 
 			// Hero Background Slides
 			var imageHead = document.getElementById("js-hero");
-			if (imageHead) {
-				var images = [
-					"/skins/skin-neayi/images/hero/shutterstock_1140147020.jpg",
-					"/skins/skin-neayi/images/hero/shutterstock_1429817771.jpg",
-					"/skins/skin-neayi/images/hero/shutterstock_1504970357.jpg",
-					"/skins/skin-neayi/images/hero/shutterstock_150648098.jpg",
-					"/skins/skin-neayi/images/hero/shutterstock_1730941180.jpg",
-					"/skins/skin-neayi/images/hero/shutterstock_340650272.jpg",
-					"/skins/skin-neayi/images/hero/shutterstock_484967650.jpg",
-					"/skins/skin-neayi/images/hero/shutterstock_562305403.jpg",
-					"/skins/skin-neayi/images/hero/shutterstock_660208033.jpg",
-					"/skins/skin-neayi/images/hero/shutterstock_708166867.jpg",
-					"/skins/skin-neayi/images/hero/shutterstock_91296467.jpg"
-				];
+			if (!imageHead)
+				return;
 
-				var i = 0;
+			var images = [
+				"/skins/skin-neayi/images/hero/shutterstock_1140147020.jpg",
+				"/skins/skin-neayi/images/hero/shutterstock_1429817771.jpg",
+				"/skins/skin-neayi/images/hero/shutterstock_1504970357.jpg",
+				"/skins/skin-neayi/images/hero/shutterstock_150648098.jpg",
+				"/skins/skin-neayi/images/hero/shutterstock_1730941180.jpg",
+				"/skins/skin-neayi/images/hero/shutterstock_340650272.jpg",
+				"/skins/skin-neayi/images/hero/shutterstock_484967650.jpg",
+				"/skins/skin-neayi/images/hero/shutterstock_562305403.jpg",
+				"/skins/skin-neayi/images/hero/shutterstock_660208033.jpg",
+				"/skins/skin-neayi/images/hero/shutterstock_708166867.jpg",
+				"/skins/skin-neayi/images/hero/shutterstock_91296467.jpg"
+			];
 
-				setInterval(function () {
-					imageHead.style.backgroundImage = "url(" + images[i] + ")";
-					i = i + 1;
-					if (i == images.length) {
-						i = 0;
-					}
-				}, 4000);
-			}
+			var i = 0;
+
+			setInterval(function () {
+				imageHead.style.backgroundImage = "url(" + images[i] + ")";
+				i = i + 1;
+				if (i == images.length) {
+					i = 0;
+				}
+			}, 4000);
+		},
+
+		setHorizontalScrollspy: function() {
 
 			// Horizontal scrollspy
 			var bar_bg = $(".scrollbar-bg");
