@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2016 The MITRE Corporation
+ * Copyright (c) 2023 Neayi SAS
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -143,7 +143,7 @@ class NeayiNavbar
 		return $GLOBALS['wgInsightsRootURL'] . "api/user/avatar/$guid/100";
 	}
 
-	/** 
+	/**
 	 * Cache the GUIDs for Users
 	 */
 	private static function getNeayiGUID( $user )
@@ -166,7 +166,7 @@ class NeayiNavbar
 		);
 		if ( $result )
 			self::$usersInfos[$user->mId]['guid'] = (string)$result->neayiauth_external_userid;
-			
+
 		return self::$usersInfos[$user->mId]['guid'];
-	}	
+	}
 }

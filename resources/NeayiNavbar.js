@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2016 The MITRE Corporation
+ * Copyright (c) 2023 Neayi SAS
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -61,7 +61,9 @@ var neayinavbar_controller = (function () {
 				$('#neayi-createaccount').remove();
 				$(`<div class="row align-items-center" style="height: 100%; margin: 0">
 					<div class="col-auto"><img class="neayi-avatar" src="${this.userPhoto}"></a></div>
-					<div class="col"><div class="navbar-tool dropdown position-static show" id="neayi-navbar-menu"><a href="#" class="neayi-username dropdown-toggle" data-toggle="dropdown" data-boundary="viewport" title="Vous êtes connecté en tant que ${this.userName}.">${this.userName}</a></div></div>
+					<div class="col"><div class="navbar-tool dropdown position-static show"
+						id="neayi-navbar-menu"><a href="#" class="neayi-username dropdown-toggle"
+						data-toggle="dropdown" data-boundary="viewport" title="`+mw.message('neayinavbar-you-are-connected-as', this.userName).escaped() +`">${this.userName}</a></div></div>
 				</div>`).appendTo('.create-profile');
 
 				$(".navbar-tool > .p-personal-tools").appendTo("#neayi-navbar-menu");
@@ -201,7 +203,7 @@ var neayinavbar_controller = (function () {
 				method: "GET"
 			}).done(function (data) {
 				self.userName = data.firstname + ' ' + data.lastname;
-				$( 'a.neayi-username' ).text(self.userName).attr('title', "Vous êtes connecté en tant que " + this.userName + ".");
+				$( 'a.neayi-username' ).text(self.userName).attr('title', mw.message('neayinavbar-you-are-connected-as', self.userName).plain() );
 				$( 'a.pt-userpage' ).text(self.userName);
 			});
 		},
