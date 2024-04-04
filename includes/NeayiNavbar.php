@@ -99,7 +99,7 @@ class NeayiNavbar
 		$navbarParams['wgInitialWatchedCount'] = $store->countWatchers($title);
 
 		$output->addJsConfigVars('NeayiNavbar', $navbarParams);
-		$output->addModules('ext.NeayiNavbar');
+		$output->addModules(['ext.NeayiNavbar']);
 	}
 
 	/**
