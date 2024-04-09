@@ -103,6 +103,16 @@ var neayinavbar_controller = (function () {
 				}, 0);
 			}
 
+			// When clicking on a result of the autosuggest search, go straight to the page
+			$('#searchInput').on('keyup', function (event) {
+				setTimeout(function() {
+					$('a.mw-searchSuggest-link').on('click', function (event) {
+						window.location.href = "/index.php?title=" + this.title;
+						event.preventDefault();
+					});
+				}, 500); 
+			});
+
 			this.setupTableOfContent();
 			this.setHomepageHeroImages();
 			this.setHorizontalScrollspy();
