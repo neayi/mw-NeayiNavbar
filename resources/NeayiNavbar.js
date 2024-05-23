@@ -107,7 +107,7 @@ var neayinavbar_controller = (function () {
 			$('#searchInput').on('keyup', function (event) {
 				setTimeout(function() {
 					$('a.mw-searchSuggest-link').on('click', function (event) {
-						window.location.href = "/index.php?title=" + this.title;
+						window.location.href = "/index.php?title=" + encodeURIComponent(this.title);
 						event.preventDefault();
 					});
 				}, 500); 
