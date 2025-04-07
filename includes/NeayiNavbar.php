@@ -35,6 +35,8 @@ class NeayiNavbar
 	// cache to store User GUIDs and information
 	private static $usersInfos = array();
 
+	private static $avatar = null;
+	
 	/**
 	 * create a NeayiNavbar singleton instance
 	 *
@@ -106,23 +108,21 @@ class NeayiNavbar
 	 * @return string the URL of the avatar of the loggedIn user
 	 */
 	public function getAvatar($user) {
-		$this->avatar = self::getAvatarFromInsight( $user );
+		self::$avatar = self::getAvatarFromInsight( $user );
 
-		if ( $this->avatar === null ) {
+		if ( self::$avatar === null ) {
 			if ( class_exists( 'wAvatar' ) ) {
 				// from Extension:SocialProfile
 				$avatar = new \wAvatar( $user->getId(), 'l' );
-				$this->avatar = $GLOBALS['wgUploadPath'] . '/avatars/' .
+				self::$avatar = $GLOBALS['wgUploadPath'] . '/avatars/' .
 					$avatar->getAvatarImage();
-			} else {
-				$this->avatar = self::getAvatarFromUser( $user );
 			}
 		}
 
-		if ( empty($this->avatar) && !empty($GLOBALS['wgInsightsRootURL']) )
-			$this->avatar = $GLOBALS['wgInsightsRootURL'] . "api/user/avatar/unknown/100";
+		if ( empty(self::$avatar) && !empty($GLOBALS['wgInsightsRootURL']) )
+			self::$avatar = $GLOBALS['wgInsightsRootURL'] . "api/user/avatar/unknown/100";
 
-		return $this->avatar;
+		return self::$avatar;
 	}
 
 	/**

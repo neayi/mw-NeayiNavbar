@@ -43,6 +43,9 @@ var neayinavbar_controller = (function () {
 			this.wgInsightsRootURL = config.wgInsightsRootURL;
 			this.userGuid = config.wgUserGuid;
 
+			if (typeof _paq === 'object')
+				_paq.push(['setUserId', this.userGuid]);	
+
 			this.setupDivs();
 
 			this.getRealUserName();
