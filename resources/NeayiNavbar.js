@@ -109,7 +109,7 @@ var neayinavbar_controller = (function () {
 			// When clicking on a result of the autosuggest search, go straight to the page
 			$('#searchInput').on('keyup', function (event) {
 				setTimeout(function() {
-					$('a.mw-searchSuggest-link').on('click', function (event) {
+					$('.suggestions-results a.mw-searchSuggest-link').on('click', function (event) {
 						window.location.href = "/index.php?title=" + encodeURIComponent(this.title);
 						event.preventDefault();
 					});
