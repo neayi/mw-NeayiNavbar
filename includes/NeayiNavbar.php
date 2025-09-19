@@ -153,7 +153,7 @@ class NeayiNavbar
 
 		self::$usersInfos[$user->mId]['guid'] = '';
 
-		$dbr = wfGetDB(DB_REPLICA);
+		$dbr = MediaWikiServices::getInstance()->getConnectionProvider()->getReplicaDatabase();
 		$result = $dbr->selectRow(
 			'neayiauth_users',
 			[
